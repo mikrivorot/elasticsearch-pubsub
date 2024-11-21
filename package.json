@@ -1,0 +1,18 @@
+{
+  "name": "elasticsearch-pubsub",
+  "version": "1.0.0",
+  "description": "Small example of elasticsearch + pubsub",
+  "main": "index.js",
+  "scripts": {
+    "create:network": "docker network create my-network",
+    "start:elastic": "docker run -d --name elasticsearch --network my-network -p 9200:9200 -e \"discovery.type=single-node\" -e \"xpack.security.enabled=false\" elasticsearch:8.15.3",
+    "start:grafana": "docker run -d -p 3000:3000 --name=grafana --network my-network grafana/grafana",
+    "init": "export PUBSUB_EMULATOR_HOST=localhost:8085 & node create-topic-and-subscription.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@elastic/elasticsearch": "^8.15.1",
+    "@google-cloud/pubsub": "^4.8.0"
+  }
+}
